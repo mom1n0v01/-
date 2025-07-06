@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Сумая — самая красивая</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+    body {
+      background: linear-gradient(135deg, #1e1e2f, #3b3b6d);
+      color: #f0e9ff;
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0 20px;
+      overflow-x: hidden;
+    }
+    header {
+      text-align: center;
+      padding: 50px 20px 30px;
+      font-size: 2.8rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px #d18cff, 0 0 20px #bb86fc;
+    }
+    .lines-container {
+      max-width: 720px;
+      margin: 0 auto 80px;
+    }
+    .line {
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+      font-size: 1.8rem;
+      margin: 45px 0;
+      padding: 10px 20px;
+      border-left: 6px solid #bb86fc;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      user-select: none;
+      white-space: nowrap;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .line.visible {
+      animation: fadeSlideIn 0.7s forwards, typing 1.5s steps(40, end) forwards;
+      border-right: 3px solid #bb86fc;
+    }
+    .line.done {
+      border-right: none;
+      white-space: normal;
+    }
+    .line:hover {
+      color: #ff79c6;
+      border-color: #ff79c6;
+      box-shadow: 0 0 10px #ff79c6;
+      transform: translateY(-5px) scale(1.05);
+      transition: all 0.3s ease-out;
+    }
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(40px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    .final-line, .love-line {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: bold;
+      margin-top: 80px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+    }
+    .final-line {
+      color: #ff9ecf;
+      animation: pulse 1.5s ease infinite;
+    }
+    .love-line {
+      color: #ffd2f7;
+      font-size: 2rem;
+      margin-bottom: 100px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+    }
+    .visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @keyframes pulse {
+      0% { text-shadow: 0 0 5px #ff80ab; }
+      50% { text-shadow: 0 0 20px #ff4081; }
+      100% { text-shadow: 0 0 5px #ff80ab; }
+    }
+  </style>
+</head>
+<body>
+
+<header>Кто самая красивая? Сумая!</header>
+
+<div class="lines-container">
+  <p class="line">Её глаза — как звёзды в ночи.</p>
+  <p class="line">Её улыбка согревает сердце.</p>
+  <p class="line">Её голос — словно музыка ветра.</p>
+  <p class="line">Сумая — нежность и сила в одном лице.</p>
+  <p class="line">Каждый миг с ней — как яркий свет.</p>
+  <p class="line">Её красота — вдохновение для всех.</p>
+  <p class="line">Сумая — это слово, что звучит как песня.</p>
+  <p class="line">Её душа светится добротой и теплом.</p>
+  <p class="line">Ни одна девушка не сравнится с ней.</p>
+</div>
+
+<div class="final-line" id="finalLine">Ты самая красивая, Сумая ❤️</div>
+<div class="love-line" id="loveLine">
+  Я не просто восхищаюсь тобой…<br>
+  Я по-настоящему тебя люблю, Сумая.<br>
+  И если судьба позволит — я хотел бы, чтобы ты стала моей девушкой. 🌹
+</div>
+
+<script>
+  const lines = document.querySelectorAll('.line');
+  const finalLine = document.getElementById('finalLine');
+  const loveLine = document.getElementById('loveLine');
+
+  function checkVisibility() {
+    const triggerBottom = window.innerHeight * 0.85;
+    lines.forEach((line) => {
+      const lineTop = line.getBoundingClientRect().top;
+      if (lineTop < triggerBottom && !line.classList.contains('visible')) {
+        line.classList.add('visible');
+        setTimeout(() => {
+          line.classList.add('done');
+        }, 1500);
+      }
+    });
+    const finalTop = finalLine.getBoundingClientRect().top;
+    if (finalTop < triggerBottom) {
+      finalLine.classList.add('visible');
+    }
+    const loveTop = loveLine.getBoundingClientRect().top;
+    if (loveTop < triggerBottom) {
+      loveLine.classList.add('visible');
+    }
+  }
+
+  window.addEventListener('scroll', checkVisibility);
+  window.addEventListener('load', checkVisibility);
+</script>
+
+</body>
+</html>
